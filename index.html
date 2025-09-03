@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinderen Helpen Kinderen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #FFE4E6, #E4F4FF, #E8F5E8);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 3px solid #FF6B9D;
+        }
+
+        .header h1 {
+            color: #FF6B9D;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .form-section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 3px solid #4ECDC4;
+        }
+
+        .form-section h2 {
+            color: #4ECDC4;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        select, input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-family: inherit;
+        }
+
+        select:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: #4ECDC4;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #FF6B9D, #4ECDC4);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .results {
+            margin-top: 30px;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+            border-left: 5px solid #FFD93D;
+            transform: translateY(10px);
+            opacity: 0;
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .tip-card h3 {
+            color: #FF6B9D;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .tip-card .author {
+            font-style: italic;
+            color: #888;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .tip-card .content {
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        .age-badge {
+            background: #FFD93D;
+            color: #333;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌈 Kinderen Helpen Kinderen 🌈</h1>
+            <p>Heb je een tijdelijke kwaal zoals een gebroken arm of oorpijn? Krijg tips van kinderen die daar ervaring mee hebben!</p>
+        </div>
+
+        <div class="form-section">
+            <h2>🔍 Vertel over je situatie</h2>
+            <form id="helpForm">
+                <div class="form-group">
+                    <label for="problem">Wat is er aan de hand?</label>
+                    <select id="problem" name="problem" required>
+                        <option value="">Kies je probleem...</option>
+                        <option value="gebroken-arm">Gebroken arm/been</option>
+                        <option value="oorpijn">Oorpijn of gehoorproblemen</option>
+                        <option value="oogproblemen">Problemen met zien</option>
+                        <option value="lopen">Moeite met lopen</option>
+                        <option value="hoofdpijn">Hoofdpijn</option>
+                        <option value="allergie">Allergie</option>
+                        <option value="anders">Iets anders</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Hoe oud ben je?</label>
+                    <select id="age" name="age" required>
+                        <option value="">Kies je leeftijd...</option>
+                        <option value="6-8">6-8 jaar</option>
+                        <option value="9-12">9-12 jaar</option>
+                        <option value="13-16">13-16 jaar</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="details">Vertel iets meer (optioneel):</label>
+                    <input type="text" id="details" name="details" placeholder="Bijvoorbeeld: ik kan niet goed schrijven met mijn gips...">
+                </div>
+
+                <button type="submit" class="btn">🚀 Zoek hulp!</button>
+            </form>
+        </div>
+
+        <div id="results" class="results hidden">
+            <h2 style="color: #4ECDC4; text-align: center; margin-bottom: 30px; font-size: 1.8em;">💡 Tips van andere kinderen</h2>
+            <div id="tipsContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // Database met tips van ervaringsdeskundige kinderen
+        const tipsDatabase = {
+            'gebroken-arm': [
+                {
+                    title: "Douchen met gips",
+                    author: "Emma, 12 jaar - heeft spierziekte en gebruikt vaak spalken",
+                    content: "Gebruik een grote plastic zak en plakband om je gips droog te houden onder de douche! Vraag iemand om je te helpen. Ik doe dit al jaren omdat ik vaak spalken draag.",
+                    emoji: "🚿"
+                },
+                {
+                    title: "Schrijven met gips",
+                    author: "Daan, 10 jaar - heeft artritis in zijn handen",
+                    content: "Probeer dikkere pennen te gebruiken! Ze zijn makkelijker vast te houden. Ik heb altijd moeite met schrijven door mijn artritis, dus ik ken alle trucjes. Vraag ook of je extra tijd mag bij toetsen.",
+                    emoji: "✏️"
+                },
+                {
+                    title: "Slapen met gips",
+                    author: "Lisa, 14 jaar - heeft een beenprothese",
+                    content: "Leg kussentjes rond je arm/been zodat je er niet tegenaan stoot in je slaap. Ik slaap altijd met kussens omdat ik weet hoe vervelend het is als je lichaam anders aanvoelt dan normaal.",
+                    emoji: "😴"
+                }
+            ],
+            'oorpijn': [
+                {
+                    title: "Omgaan met geluid",
+                    author: "Max, 11 jaar - heeft tinnitus sinds hij klein is",
+                    content: "Als je oren zeer doen of je hoort rare geluiden, probeer dan zachte muziek of 'witte ruis' (zoals een ventilator). Dat helpt mij elke dag met mijn tinnitus. Soms draag ik speciale oordopjes.",
+                    emoji: "🎵"
+                },
+                {
+                    title: "Praten met anderen",
+                    author: "Sophie, 13 jaar - draagt gehoorapparaten",
+                    content: "Schaam je niet om te vragen of mensen harder willen praten! Ik doe dat altijd. Vertel je vrienden wat er aan de hand is - ze willen je vast helpen. En ga dichter bij de juf zitten in de klas.",
+                    emoji: "🗣️"
+                },
+                {
+                    title: "School tips",
+                    author: "Tim, 9 jaar - heeft gehoorproblemen sinds zijn geboorte",
+                    content: "Vraag je juf of je vooraan mag zitten. En als je iets niet verstaat, steek gewoon je hand op! Iedereen wil je helpen. Ik vertel altijd meteen aan nieuwe juffen over mijn oren.",
+                    emoji: "🏫"
+                }
+            ],
+            'oogproblemen': [
+                {
+                    title: "Lezen met moeite",
+                    author: "Anna, 12 jaar - heeft een oogziekte waardoor ze slecht ziet",
+                    content: "Maak letters groter op je computer of tablet! En gebruik een lampje extra bij het lezen. Ik gebruik altijd vergrootglas voor kleine lettertjes. Vraag ook om grotere prints op school.",
+                    emoji: "🔍"
+                },
+                {
+                    title: "Veilig bewegen",
+                    author: "Jamal, 10 jaar - heeft problemen met dieptezien",
+                    content: "Gebruik je handen om te voelen waar dingen zijn, vooral trappen! En vraag iemand om met je mee te lopen als je onzeker bent. Ik doe dit altijd bij nieuwe plekken.",
+                    emoji: "👥"
+                }
+            ],
+            'lopen': [
+                {
+                    title: "Vermoeidheid",
+                    author: "Noa, 13 jaar - heeft spierziekte en gebruikt soms een rolstoel",
+                    content: "Luister naar je lichaam! Als je moe wordt, rust dan uit. Gebruik krukken of vraag om hulp - dat is niet erg! Ik wissel tussen lopen en mijn rolstoel, en dat is oké.",
+                    emoji: "🛡️"
+                },
+                {
+                    title: "Op school",
+                    author: "Robin, 11 jaar - heeft een beenprobleem sinds geboorte",
+                    content: "Vraag of je eerder naar je volgende les mag om niet te hoeven haasten. En neem de lift als die er is! Vertel je vrienden dat ze niet op je hoeven te wachten als je langzaam loopt.",
+                    emoji: "🏫"
+                }
+            ],
+            'hoofdpijn': [
+                {
+                    title: "Omgaan met licht",
+                    author: "Zara, 14 jaar - heeft migraine sinds ze 8 is",
+                    content: "Fel licht kan hoofdpijn erger maken. Vraag of de gordijnen dicht mogen op school, of draag een pet buiten. Ik heb altijd een zonnebril bij me, zelfs binnen!",
+                    emoji: "🕶️"
+                },
+                {
+                    title: "Rustmomenten",
+                    author: "Lucas, 12 jaar - heeft vaak hoofdpijn door een aandoening",
+                    content: "Neem pauzes! Leg een koud washandje op je voorhoofd. En vertel volwassenen hoe je je voelt - zij kunnen je helpen. Ik ga altijd naar de ziekenzaal op school als het erg wordt.",
+                    emoji: "❄️"
+                }
+            ],
+            'allergie': [
+                {
+                    title: "Voorzichtig zijn met eten",
+                    author: "Mila, 10 jaar - heeft ernstige voedselallergiën",
+                    content: "Lees altijd wat er op verpakkingen staat! En vertel iedereen over je allergie. Ik heb altijd mijn medicijnen bij me en mijn vrienden weten precies wat ze moeten doen als het mis gaat.",
+                    emoji: "🏷️"
+                },
+                {
+                    title: "Altijd voorbereid zijn",
+                    author: "Kevin, 13 jaar - allergisch voor veel dingen",
+                    content: "Neem je eigen eten mee naar feestjes. En zorg dat iemand altijd weet waar je medicijnen zijn! Mijn ouders hebben met school gepraat zodat alle juffen weten wat ze moeten doen.",
+                    emoji: "🎒"
+                }
+            ]
+        };
+
+        document.getElementById('helpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const problem = document.getElementById('problem').value;
+            const age = document.getElementById('age').value;
+            const details = document.getElementById('details').value;
+
+            if (!problem || !age) {
+                alert('Vul alsjeblieft alle verplichte velden in!');
+                return;
+            }
+
+            showTips(problem, age);
+        });
+
+        function showTips(problem, userAge) {
+            const tipsContainer = document.getElementById('tipsContainer');
+            const resultsSection = document.getElementById('results');
+            
+            tipsContainer.innerHTML = '';
+            
+            const tips = tipsDatabase[problem] || [];
+            
+            if (tips.length === 0) {
+                tipsContainer.innerHTML = '<div class="tip-card"><h3>🤗 Nog geen tips beschikbaar</h3><p>We zijn nog bezig met het verzamelen van tips voor dit probleem. Probeer het binnenkort nog eens!</p></div>';
+            } else {
+                tips.forEach((tip, index) => {
+                    const tipCard = document.createElement('div');
+                    tipCard.className = 'tip-card';
+                    tipCard.style.animationDelay = `${index * 0.2}s`;
+                    
+                    tipCard.innerHTML = `
+                        <h3><span class="emoji">${tip.emoji}</span>${tip.title}</h3>
+                        <div class="author">💝 ${tip.author}</div>
+                        <div class="content">${tip.content}</div>
+                    `;
+                    
+                    tipsContainer.appendChild(tipCard);
+                });
+            }
+            
+            resultsSection.classList.remove('hidden');
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Easter egg voor specifieke input
+        document.getElementById('details').addEventListener('input', function(e) {
+            if (e.target.value.toLowerCase().includes('bang')) {
+                e.target.style.borderColor = '#FFD93D';
+                e.target.placeholder = 'Het is oké om bang te zijn, andere kinderen begrijpen dat! 🤗';
+            }
+        });
+    </script>
+</body>
+</html>
